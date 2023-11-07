@@ -37,7 +37,6 @@ public class VagaEstacionamentoController {
         return ResponseEntity.ok().body(vagaEstacionamentoService.findAllPaged(pageable));
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<VagaEstacionamento> update(@PathVariable Long id, @RequestBody @Valid VagaEstacionamento entity){
         return ResponseEntity.ok().body(vagaEstacionamentoService.update(id,entity));

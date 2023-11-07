@@ -1,7 +1,7 @@
 package com.example.mrcpark.service;
 
-import com.example.mrcpark.model.Carro;
-import com.example.mrcpark.repositories.CarroRepository;
+import com.example.mrcpark.model.Veiculo;
+import com.example.mrcpark.repositories.VeiculoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -13,28 +13,28 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CarroService {
+public class VeiculoService {
 
-    private final CarroRepository carroRepository;
-
-    @Transactional
-    public Carro findById(Long id) {
-        return carroRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-    }
-    @Transactional
-    public Carro insert(Carro entity) {
-        return carroRepository.save(entity);
-    }
-    @Transactional
-    public Page<Carro> findAllPaged(Pageable pageable) {
-        return carroRepository.findAll(pageable);
-    }
+    private final VeiculoRepository veiculoRepository;
 
     @Transactional
-    public Carro update(Long id, Carro dto) {
+    public Veiculo findById(Long id) {
+        return veiculoRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+    @Transactional
+    public Veiculo insert(Veiculo entity) {
+        return veiculoRepository.save(entity);
+    }
+    @Transactional
+    public Page<Veiculo> findAllPaged(Pageable pageable) {
+        return veiculoRepository.findAll(pageable);
+    }
+
+    @Transactional
+    public Veiculo update(Long id, Veiculo dto) {
         try {
             findById(id);
-            return carroRepository.save(dto);
+            return veiculoRepository.save(dto);
 
         }catch (EntityNotFoundException e){
             throw new EntityNotFoundException("Id not found " + id);
@@ -45,7 +45,7 @@ public class CarroService {
     public void delete(Long id) {
 
         try {
-            carroRepository.deleteById(id);
+            veiculoRepository.deleteById(id);
         }
         catch (EmptyResultDataAccessException e) {
             throw new EntityNotFoundException("Id not found " + id);

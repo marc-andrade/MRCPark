@@ -26,7 +26,7 @@ public class RegistroEstacionamento {
 
     @ManyToOne
     @JoinColumn(name = "carro_id")
-    private Carro carro;
+    private Veiculo veiculo;
 
     @ManyToOne
     @JoinColumn(name = "vaga_id")

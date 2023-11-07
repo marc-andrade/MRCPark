@@ -1,7 +1,7 @@
 package com.example.mrcpark.Controller;
 
-import com.example.mrcpark.model.Carro;
-import com.example.mrcpark.service.CarroService;
+import com.example.mrcpark.model.Veiculo;
+import com.example.mrcpark.service.VeiculoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,37 +15,37 @@ import java.net.URI;
 @RestController
 @RequestMapping("/carros")
 @RequiredArgsConstructor
-public class CarroController {
+public class VeiculoController {
 
-    private final CarroService carroService;
+    private final VeiculoService veiculoService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Carro> findById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(carroService.findById(id));
+    public ResponseEntity<Veiculo> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(veiculoService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Carro> insert(@RequestBody Carro entity) {
-        Carro newCar = carroService.insert(entity);
+    public ResponseEntity<Veiculo> insert(@RequestBody Veiculo entity) {
+        Veiculo newCar = veiculoService.insert(entity);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/id")
                 .buildAndExpand(newCar.getId()).toUri();
         return ResponseEntity.created(uri).body(entity);
     }
 
     @GetMapping
-    public ResponseEntity<Page<Carro>> findAllPaged(Pageable pageable){
-        return ResponseEntity.ok().body(carroService.findAllPaged(pageable));
+    public ResponseEntity<Page<Veiculo>> findAllPaged(Pageable pageable){
+        return ResponseEntity.ok().body(veiculoService.findAllPaged(pageable));
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Carro> update(@PathVariable Long id, @RequestBody @Valid Carro entity){
-        return ResponseEntity.ok().body(carroService.update(id,entity));
+    public ResponseEntity<Veiculo> update(@PathVariable Long id, @RequestBody @Valid Veiculo entity){
+        return ResponseEntity.ok().body(veiculoService.update(id,entity));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        carroService.delete(id);
+        veiculoService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
