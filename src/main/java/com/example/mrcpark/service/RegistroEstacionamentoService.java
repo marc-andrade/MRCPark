@@ -37,6 +37,7 @@ public class RegistroEstacionamentoService {
         if(entity.getEntrada() == null) {
             entity.setEntrada(LocalDateTime.now());
         }
+        entity.getVagaEstacionamento().setOcupada(true);
         return registroEstacionamentoRepository.save(entity);
     }
     @Transactional
@@ -69,7 +70,17 @@ public class RegistroEstacionamentoService {
         }
     }
 
+    @Transactional
     public RegistroEstacionamento darBaixaEstacionamento(Long id, RegistroEstacionamento baixa) {
-        return null;
+        RegistroEstacionamento registroEstacionamento = findById(id);
+
+        if(baixa.getSaida() == null) {
+            registroEstacionamento.setSaida(LocalDateTime.now());
+        } else {
+            registroEstacionamento.setSaida(baixa.getSaida());
+        }
+        //TODO implementar a logica de cobrança por hora
+
+        return registroEstacionamentoRepository.save(registroEstacionamento);
     }
 }
