@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +22,7 @@ public class RegistroEstacionamento {
 
     private LocalDateTime entrada;
     private LocalDateTime saida;
-    private double valorCobrado;
+    private BigDecimal valorCobrado;
 
     @ManyToOne
     @JoinColumn(name = "carro_id")

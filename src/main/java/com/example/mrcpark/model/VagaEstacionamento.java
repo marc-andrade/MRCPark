@@ -20,4 +20,5 @@ public class VagaEstacionamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String endereco;
+    private Boolean ocupado;
 }
