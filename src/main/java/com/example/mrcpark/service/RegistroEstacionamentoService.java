@@ -33,7 +33,7 @@ public class RegistroEstacionamentoService {
     }
     @Transactional
     public RegistroEstacionamento insert(RegistroEstacionamento entity) {
-        VagaEstacionamento vagaEstacionamento = vagaEstacionamentoService.findById(entity.getId());
+        VagaEstacionamento vagaEstacionamento = vagaEstacionamentoService.findById(entity.getVagaEstacionamento().getId());
         veiculoService.findById(entity.getVeiculo().getId());
         if(vagaEstacionamento.getOcupada()) {
             //TODO criar erro de vaga ocupada
