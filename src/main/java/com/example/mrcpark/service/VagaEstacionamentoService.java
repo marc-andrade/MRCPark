@@ -24,6 +24,9 @@ public class VagaEstacionamentoService {
     }
     @Transactional
     public VagaEstacionamento insert(VagaEstacionamento entity) {
+        if (entity.getOcupada() == null) {
+            entity.setOcupada(false);
+        }
         return vagaEstacionamentoRepository.save(entity);
     }
     @Transactional

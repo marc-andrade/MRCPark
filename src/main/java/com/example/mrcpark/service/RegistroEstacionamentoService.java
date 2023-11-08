@@ -12,11 +12,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Service
 @RequiredArgsConstructor
 public class RegistroEstacionamentoService {
+
+    // Define o valor da hora de estacionamento (ajuste o valor conforme necessário)
+    private final double VALOR_DA_HORA = 10.0; // Exemplo de valor da hora
 
     private final RegistroEstacionamentoRepository registroEstacionamentoRepository;
     private final VeiculoService veiculoService;
@@ -79,7 +84,17 @@ public class RegistroEstacionamentoService {
         } else {
             registroEstacionamento.setSaida(baixa.getSaida());
         }
-        //TODO implementar a logica de cobrança por hora
+        LocalDateTime entrada = registroEstacionamento.getEntrada();
+        LocalDateTime saida = registroEstacionamento.getSaida();
+
+        long minutosEstacionados = ChronoUnit.MINUTES.between(entrada, saida);
+        long horasEstacionadas = minutosEstacionados / 60;
+
+        long horasArredondadas = Math.round(horasEstacionadas);
+
+        BigDecimal valorTotal = BigDecimal.valueOf(horasArredondadas * VALOR_DA_HORA);
+
+        registroEstacionamento.setValorCobrado(valorTotal);
 
         return registroEstacionamentoRepository.save(registroEstacionamento);
     }
