@@ -4,17 +4,17 @@ import com.example.mrcpark.model.Veiculo;
 import com.example.mrcpark.service.VeiculoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping("/carros")
+@RequestMapping("/veiculos")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class VeiculoController {
 
     private final VeiculoService veiculoService;
@@ -33,8 +33,8 @@ public class VeiculoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Veiculo>> findAllPaged(Pageable pageable){
-        return ResponseEntity.ok().body(veiculoService.findAllPaged(pageable));
+    public ResponseEntity<List<Veiculo>> findAllPaged(){
+        return ResponseEntity.ok().body(veiculoService.findAll());
     }
 
 

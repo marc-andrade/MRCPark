@@ -7,9 +7,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,10 +25,10 @@ public class VeiculoService {
     public Veiculo insert(Veiculo entity) {
         return veiculoRepository.save(entity);
     }
-    @Transactional
-    public Page<Veiculo> findAllPaged(Pageable pageable) {
-        return veiculoRepository.findAll(pageable);
-    }
+//    @Transactional
+//    public Page<Veiculo> findAllPaged(Pageable pageable) {
+//        return veiculoRepository.findAll(pageable);
+//    }
 
     @Transactional
     public Veiculo update(Long id, Veiculo dto) {
@@ -53,5 +53,9 @@ public class VeiculoService {
         catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("Integrity violation");
         }
+    }
+    @Transactional
+    public List<Veiculo> findAll() {
+        return veiculoRepository.findAll();
     }
 }
